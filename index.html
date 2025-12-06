@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>P. Rohit | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.1);
+      --accent-2: #22c55e;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --card: #111827;
+      --border: rgba(148, 163, 184, 0.35);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+      --radius-xl: 18px;
+      --radius-2xl: 24px;
+      --blur-bg: blur(18px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #1d2640 0, #050816 45%, #020617 100%);
+      color: var(--text);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Layout */
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    /* Glassy Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(15,23,42,0.92), rgba(15,23,42,0.55));
+      border-bottom: 1px solid rgba(148,163,184,0.25);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      font-size: 1rem;
+    }
+
+    .nav-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #a855f7, #4f46e5);
+      box-shadow: 0 0 18px rgba(129, 140, 248, 0.75);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #22c55e, #4f46e5);
+      transition: width 0.25s ease-out;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 60px 0 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 32px;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: linear-gradient(135deg, rgba(148,163,184,0.18), rgba(15,23,42,0.85));
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .hero-badge span {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.12);
+      color: #bbf7d0;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #22c55e, #4f46e5, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(148,163,184,0.55);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: radial-gradient(circle at top left, rgba(148,163,184,0.25), rgba(15,23,42,0.95));
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 14px rgba(34,197,94,0.9);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 0.85rem;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease-out;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #22c55e, #4f46e5);
+      color: #ecfdf5;
+      box-shadow: 0 16px 35px rgba(79, 70, 229, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 20px 45px rgba(79, 70, 229, 0.85);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148,163,184,0.6);
+      color: var(--muted);
+      background: rgba(15,23,42,0.6);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15,23,42,0.95);
+      color: var(--text);
+      border-color: rgba(148,163,184,0.9);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .orbit-card {
+      position: relative;
+      padding: 18px;
+      border-radius: var(--radius-2xl);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.15), rgba(15,23,42,0.96));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      min-height: 230px;
+    }
+
+    .orbit-card::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(96,165,250,0.35), transparent 60%);
+      top: -60px;
+      right: -60px;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .orbit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .orbit-title {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .orbit-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.7);
+      color: var(--muted);
+    }
+
+    .orbit-stack {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .orbit-tag {
+      font-size: 0.78rem;
+      padding: 7px 9px;
+      border-radius: 12px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.8);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .orbit-badge {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, #22c55e, #4f46e5, #22c55e);
+    }
+
+    .orbit-footer {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pill-soft {
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: rgba(15,23,42,0.9);
+      border: 1px dashed rgba(148,163,184,0.8);
+    }
+
+    /* Section base */
+    section {
+      padding: 28px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-heading h2 {
+      font-size: 1.2rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .section-heading span {
+      width: 26px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #22c55e, #4f46e5, transparent);
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+      max-width: 620px;
+    }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(79,70,229,0.14), rgba(15,23,42,0.98));
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      box-shadow: 0 16px 40px rgba(15,23,42,0.9);
+      transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(56,189,248,0.16), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.18s ease-out;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-4px) translateZ(0);
+      box-shadow: 0 22px 58px rgba(15,23,42,0.95);
+      border-color: rgba(129,140,248,0.85);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+
+    .card-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.75);
+      padding: 3px 8px;
+      font-size: 0.7rem;
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.95);
+    }
+
+    /* Skills list */
+    .list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 4px 0;
+      color: var(--muted);
+    }
+
+    .list li span {
+      font-size: 0.6rem;
+      margin-top: 5px;
+      color: #4ade80;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 18px;
+      border-left: 1.5px dashed rgba(148,163,184,0.6);
+    }
+
+    .timeline-item {
+      margin-bottom: 16px;
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .timeline-bullet {
+      position: absolute;
+      left: -10px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #4f46e5);
+      box-shadow: 0 0 18px rgba(79,70,229,0.8);
+    }
+
+    .timeline-title {
+      font-size: 0.92rem;
+      margin-bottom: 2px;
+    }
+
+    .timeline-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .timeline-time {
+      font-size: 0.75rem;
+      color: #a5b4fc;
+    }
+
+    /* Participation & Contact */
+    .pill-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.82rem;
+    }
+
+    .pill-list li {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.95);
+      color: var(--muted);
+    }
+
+    .contact-card {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top left, rgba(34,197,94,0.16), rgba(15,23,42,0.98));
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: grid;
+      gap: 4px;
+    }
+
+    .contact-card a {
+      color: #a5b4fc;
+    }
+
+    footer {
+      padding: 18px 0 28px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer span {
+      background: linear-gradient(120deg, #22c55e, #4f46e5);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <div class="nav-brand">
+        <div class="nav-dot"></div>
+        <span>P. Rohit</span>
+        <small style="color: var(--muted); font-size: 0.7rem;">Electronics &amp; Instrumentation</small>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#participation">Participation</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <main class="container">
+    <section class="hero" id="about">
+      <div>
+        <div class="hero-badge">
+          🚀 Engineering Student &amp; Tech Enthusiast
+          <span>Actively Learning</span>
+        </div>
+        <h1 class="hero-title">
+          Hi, I'm <span>P. Rohit</span><br />
+          I build things with code &amp; circuits.
+        </h1>
+        <p class="hero-subtitle">
+          A dedicated Electronics and Instrumentation Engineering student with a strong passion for science &amp; technology.  
+          I tinker with web apps, embedded IoT systems, and control systems — always exploring, learning, and improving.
+        </p>
+
+        <div class="hero-meta">
+          <div class="badge">
+            <div class="badge-dot"></div>
+            Web Development • Embedded IoT • Control Systems
+          </div>
+          <div class="badge">📍 Hyderabad, India</div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            View Projects
+            <span>↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/rohit-ponnapalli-44899b2a0/" target="_blank" class="btn btn-ghost">
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- Fancy right hero card -->
+      <div class="hero-right">
+        <div class="orbit-card">
+          <div class="orbit-header">
+            <div>
+              <div class="orbit-title">Current Focus</div>
+              <small style="color: var(--muted); font-size: 0.75rem;">
+                Growing skills one project at a time
+              </small>
+            </div>
+            <div class="orbit-pill">2023 – Present</div>
+          </div>
+
+          <div class="orbit-stack">
+            <div class="orbit-tag">
+              <div class="orbit-badge"></div>
+              Web: HTML • CSS • JS • React • Node
+            </div>
+            <div class="orbit-tag">
+              <div class="orbit-badge"></div>
+              Embedded: Arduino • ESP • Sensors
+            </div>
+            <div class="orbit-tag">
+              <div class="orbit-badge"></div>
+              Control Systems &amp; Python Tools
+            </div>
+            <div class="orbit-tag">
+              <div class="orbit-badge"></div>
+              DSA: Basic ➜ Intermediate
+            </div>
+          </div>
+
+          <div class="orbit-footer">
+            <div>
+              📓 B.Tech – Electronics &amp; Instrumentation<br />
+              <span style="font-size: 0.7rem;">VNR Vignana Jyothi Institute of Engineering and Technology</span>
+            </div>
+            <div class="pill-soft">
+              Open to: Internships • Projects • Collaborations
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-heading">
+        <h2>Technical Skills</h2>
+        <span></span>
+      </div>
+      <p class="section-sub">
+        A snapshot of the technologies and tools I work with across software, web, and embedded systems.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">Programming Languages</div>
+          <div class="card-meta">Logic, problem-solving &amp; core programming</div>
+          <ul class="list">
+            <li><span>●</span>C</li>
+            <li><span>●</span>C++</li>
+            <li><span>●</span>Python</li>
+            <li><span>●</span>JavaScript</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Web Development</div>
+          <div class="card-meta">Building modern, full-stack web experiences</div>
+          <ul class="list">
+            <li><span>●</span>HTML, CSS</li>
+            <li><span>●</span>Node.js, Express (Basic)</li>
+            <li><span>●</span>MongoDB &amp; RESTful APIs</li>
+            <li><span>●</span>React (Basics &amp; Components)</li>
+          </ul>
+          <div class="chip-row">
+            <div class="chip">Full Stack Basics</div>
+            <div class="chip">API Integration</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Embedded &amp; IoT</div>
+          <div class="card-meta">Connecting hardware to intelligent systems</div>
+          <ul class="list">
+            <li><span>●</span>ESP Boards &amp; Arduino Boards</li>
+            <li><span>●</span>Sensor Interfacing</li>
+            <li><span>●</span>Circuit Design &amp; Prototyping</li>
+          </ul>
+          <div class="chip-row">
+            <div class="chip">IoT Prototypes</div>
+            <div class="chip">Real-world Sensing</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Tools &amp; CS Fundamentals</div>
+          <div class="card-meta">Developer tools and foundations</div>
+          <ul class="list">
+            <li><span>●</span>Arduino IDE</li>
+            <li><span>●</span>VS Code</li>
+            <li><span>●</span>GitHub</li>
+            <li><span>●</span>Data Structures &amp; Algorithms (Basic to Intermediate)</li>
+          </ul>
+          <div class="chip-row">
+            <div class="chip">Version Control</div>
+            <div class="chip">Problem Solving</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-heading">
+        <h2>Projects</h2>
+        <span></span>
+      </div>
+      <p class="section-sub">
+        Some of the things I've built while exploring programming, control systems, and embedded electronics.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">C-Based Tax Calculator</div>
+          <div class="card-meta">C • Problem Solving • Logic</div>
+          <p style="font-size: 0.86rem; color: var(--muted); margin-top: 6px;">
+            A command-line tax calculator written in C that computes payable tax based on user input income slabs and conditions.
+          </p>
+          <div class="chip-row" style="margin-top: 10px;">
+            <div class="chip">C Programming</div>
+            <div class="chip">Conditionals &amp; Loops</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Python-Based Control System Analyzer</div>
+          <div class="card-meta">Python • Control Systems • Visualization</div>
+          <p style="font-size: 0.86rem; color: var(--muted); margin-top: 6px;">
+            A Python tool to analyze control systems: creates transfer functions, converts to state-space,
+            and supports step/impulse responses, Bode plots, root locus, and stability checks.
+          </p>
+          <div class="chip-row" style="margin-top: 10px;">
+            <div class="chip">Control Theory</div>
+            <div class="chip">Matplotlib / Plotting</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Proximity-Based Object Detector</div>
+          <div class="card-meta">Embedded IoT • Arduino • Sensors</div>
+          <p style="font-size: 0.86rem; color: var(--muted); margin-top: 6px;">
+            An IoT-based object detection system using sensors and Arduino to detect nearby objects and respond in real-time,
+            suitable for basic automation and safety applications.
+          </p>
+          <div class="chip-row" style="margin-top: 10px;">
+            <div class="chip">Sensor Interfacing</div>
+            <div class="chip">Embedded C</div>
+            <div class="chip">Real-time Response</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <div class="section-heading">
+        <h2>Education</h2>
+        <span></span>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">B.Tech – Electronics and Instrumentation Engineering</div>
+          <div class="timeline-meta">
+            Vallurupalli Nageswara Rao Vignana Jyothi Institute of Engineering and Technology (VNRVJIET)
+          </div>
+          <div class="timeline-time">Sept 2023 – Present</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">Intermediate – MPC</div>
+          <div class="timeline-meta">Resonance Junior College</div>
+          <div class="timeline-time">Completed – May 2023</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">High School</div>
+          <div class="timeline-meta">Narayana High School</div>
+          <div class="timeline-time">Completed – May 2021</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Participation -->
+    <section id="participation">
+      <div class="section-heading">
+        <h2>Participation &amp; Activities</h2>
+        <span></span>
+      </div>
+      <p class="section-sub">
+        I try to stay active in events, hackathons, and technical showcases to learn from peers and real-world problems.
+      </p>
+      <ul class="pill-list">
+        <li>Open House – VNRVJIET</li>
+        <li>CodeNox-2.0 – VNRVJIET</li>
+      </ul>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-heading">
+        <h2>Contact</h2>
+        <span></span>
+      </div>
+      <p class="section-sub">
+        If you’d like to discuss projects, internships, collaborations, or just say hi, feel free to reach out.
+      </p>
+
+      <div class="contact-card">
+        <div>📍 Hyderabad, India</div>
+        <div>📞 <strong>+91 8790168260</strong></div>
+        <div>📧 <a href="mailto:5158399rohit@gmail.com">5158399rohit@gmail.com</a></div>
+        <div>🔗 <a href="https://www.linkedin.com/in/rohit-ponnapalli-44899b2a0/" target="_blank">LinkedIn: rohit-ponnapalli</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span>P. Rohit</span> · Built with curiosity, code &amp; circuits ⚡
+  </footer>
+
+</body>
+</html>
